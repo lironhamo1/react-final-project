@@ -2,25 +2,24 @@ import { Routes, Route, Link } from 'react-router-dom';
 
 import Products from './pages/Products';
 import EditProduct from './pages/EditProduct';
+import EditCustomer from './pages/EditCustomer';
 
-import Costumers from './pages/Costumers';
+import Customers from './pages/Customers';
 import Purchases from './pages/Purchases';
+import Menu from './pages/Menu';
+
 
 
 
 const App = () => {
   return (
     <>
-      <h1>Welcome to Menu</h1>
-      <Link to='/products'>Products Page</Link> <br />
-      <Link to='/costumers'>Costumers Page</Link> <br />
-      <Link to='/purchases'>Purchases Page</Link> <br />
-    
-
       <Routes>
+       <Route path='/' element={<Menu />} />
         <Route path='/products' element={<Products />} />
         <Route path='/EditProduct/:id' element={<EditProduct />} />
-        <Route path='/costumers' element={<Costumers />} />
+        <Route path='/EditCustomer/:id' element={<EditCustomer />} />
+        <Route path='/customers' element={<Customers />} />
         <Route path='/purchases' element={<Purchases />} />
       </Routes>
     </>

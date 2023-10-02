@@ -2,7 +2,7 @@ import { useEffect, useState,View } from 'react'
 import { collection,doc,onSnapshot,query,updateDoc,deleteDoc } from 'firebase/firestore';
 import db from '../firebase'
 import { useParams } from 'react-router-dom';
-
+import CustomersOfProduct from './CustomersOfProduct'
 //note- shift alt a
 
 function EditProduct() {
@@ -38,10 +38,18 @@ const deleteProduct=async ()=>{
         Quantity:
         <input type='number' defaultValue={product.quantity} onInput={(e) => setProduct({...product,quantity: +e.target.value})} /> <br />
 
-        <button type='submit'>Send</button>
+        <button type='submit'>Save</button>
         <button onClick={deleteProduct}>Delete</button><br/>
-        list of all costumers 
-      </form>    </>
+      </form>
+
+      list of all costumers 
+
+      <CustomersOfProduct product={product}/>
+
+      
+
+     </>
+
   )
 }
 

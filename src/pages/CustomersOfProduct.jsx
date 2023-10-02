@@ -3,11 +3,11 @@ import { collection,doc,onSnapshot,query } from 'firebase/firestore';
 import db from '../firebase'
 import { Routes, Route, Link } from 'react-router-dom';
 import Purchase from './Purchase'
-import CustomersOfProduct from './CustomersOfProduct';
 
 
 
-function Product({product,products}) {
+
+function CustomersOfProduct({product, pageName}) {
 const [purchases, setPurchases] = useState([]);
 const [customers, setCustomers] = useState([]);
 
@@ -22,6 +22,7 @@ useEffect(()=>{
         }
       })
       setPurchases(data);
+   
     })
   }
   const fetchDataCost=async()=>{
@@ -45,14 +46,15 @@ const purchaseOfProduct=purchases.filter(purchase => purchase.productID == produ
 
   return (
     <>
-      <h3>Product:</h3>
-      <Link to={`/EditProduct/${product.id}`}>{product.name}</Link> <br/>
-      price :{product.price}<br/>
-      quantity :{product.quantity}<br/>
-
-      <CustomersOfProduct product={product} pageName={'Product'}/>
+      <h3>customer that buy the product:</h3>
+      {purchaseOfProduct.map((purchase, index) => {
+          return (
+            <Purchase purchase={purchase}  customers={customers} key={index} pageName={pageName}/>
+          );
+        })}
+      
     </>
   )
 }
 
-export default Product
+export default CustomersOfProduct

@@ -5,6 +5,8 @@ import Product from './Product';
 
 function Products() {
     const [products, setProducts] = useState([]);
+    const [purchases, setPurchases] = useState([]);
+
 
   useEffect(()=>{
     const fetchData=async()=>{
@@ -21,14 +23,21 @@ function Products() {
     }
     fetchData();
   })
+    const q = query(collection(db, 'purchases'));
+    onSnapshot(q, (querySnapshot) => {
+      setPurchases(
+        querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+      );
+    });
+
 
   
   return (
     <>
       <h1>Products Page</h1>
-      <h2>Amount of all purchased products: ----- </h2>
+      <h2>Amount of all purchased products: {purchases.length} </h2>
       {products.map((product) => {
-        return <Product key={product.id} product={product} />;
+        return <Product key={product.id} product={product} products={products} />;
       })}
     </>
   )
