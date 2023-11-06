@@ -35,6 +35,7 @@ useEffect(()=>{
         }
       })
       setCustomers(data);
+      
 
     })
   }

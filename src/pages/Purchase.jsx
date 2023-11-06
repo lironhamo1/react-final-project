@@ -30,7 +30,9 @@ function Purchase({purchase, customers , pageName}) {
       fetchData();
     })
 
-    const customer1= customers.filter((d) => purchase.customerID == d.id);
+    const customerOfPorduct=customers.filter((cost) => purchase.customerID == cost.id);
+      
+   
 
     
     
@@ -47,16 +49,15 @@ function Purchase({purchase, customers , pageName}) {
             ,date: new Date().toLocaleString()
 
         }
-   
         await addDoc(collection(db, 'purchases'), obj);
 
           };
 
   /*Product ID: <Link to={`/EditProduct/${purchase.productID}`}>{purchase.productID}</Link> <br/>  */
-
+   /*<Link to={`/EditCustomer/${purchase.customerID}`}>{customer1?.firstName}</Link> <br/>*/
   return (
     <>
-      Customer Name: <Link to={`/EditCustomer/${purchase.customerID}`}>{customer1[0]?.firstName}</Link> <br/>
+      Customer Name: {customerOfPorduct[0]?.firstName} {customerOfPorduct[0]?.lastName} <br/>
       date :{purchase.date}
       <br/><br/>    
   
